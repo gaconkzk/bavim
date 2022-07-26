@@ -1,4 +1,5 @@
 export const DEFAULT_CONFIG = {
+  title: 'BAVI Video Player',
   // Disable
   enabled: true,
 
