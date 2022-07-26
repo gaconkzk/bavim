@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Plyr from 'plyr'
+  import OpenPlayerJs from 'openplayerjs'
   import { onMount } from 'svelte'
 
   import { DEFAULT_CONFIG as defaultConfig } from '../constant'
@@ -13,17 +13,37 @@
   let container: HTMLMediaElement
   let player
 
-  let config = Object.assign({}, { ...defaultConfig }, {})
+  let config = Object.assign(
+    {},
+    { ...defaultConfig },
+    {
+      showLoaderOnInit: false,
+      pauseOthers: false,
+    },
+  )
 
   onMount(() => {
     if (container) {
-      player = new Plyr(container, config)
+      player = new OpenPlayerJs(container, {
+        showLoaderOnInit: false,
+        pauseOthers: false,
+      })
+      player.init()
     }
   })
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
-<video bind:this={container} data-poster={bgImg} {src} preload="auto">
+<video
+  bind:this={container}
+  data-poster={bgImg}
+  class="op-player__media"
+  controls
+  playsinline
+>
+  {#if src}
+    <source {src} type="video/mp4" />
+  {/if}
   {#each tracks as track}
     <Track {...track} />
   {/each}

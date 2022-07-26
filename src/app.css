@@ -1,4 +1,5 @@
 @import url('./lib/plyr/styles.css');
+@import url('./lib/openplayer/styles.css');
 
 html {
   @apply bg-gray-900 text-gray-100;
