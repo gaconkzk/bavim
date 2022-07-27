@@ -1,7 +1,6 @@
 <script lang="ts">
   import PlyrVideo from './plyr/Video.svelte'
   import OpenPlayerVideo from './openplayer/Video.svelte'
-  import Track from './Track.svelte'
   import { MEDIA_TYPE } from './constant'
 
   const types = {
@@ -32,7 +31,7 @@
   {/if}
   {#if tracks.length > 0}
     {#each tracks as track}
-      <Track {...track} />
+      <track {...track} />
     {/each}
   {/if}
 </svelte:component>
