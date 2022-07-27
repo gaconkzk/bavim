@@ -1,18 +1,16 @@
 <script lang="ts">
   import Plyr from 'plyr'
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { nanoid } from 'nanoid'
 
   import { DEFAULT_CONFIG as defaultConfig } from '../constant'
-  import Track from '../Track.svelte'
-
-  export let tracks: TrackType[] = []
 
   export let bgImg: string = null
   export let src: string = null
+  export let preload: string = 'auto'
 
   let container: HTMLMediaElement
-  let player
+  let player: Plyr
 
   let config = Object.assign({}, { ...defaultConfig }, {})
 
@@ -20,6 +18,10 @@
     if (container) {
       player = new Plyr(container, config)
     }
+  })
+
+  onDestroy(() => {
+    player?.destroy()
   })
 </script>
 
@@ -29,9 +31,7 @@
   id="pl_{nanoid()}"
   data-poster={bgImg}
   {src}
-  preload="auto"
+  {preload}
 >
-  {#each tracks as track}
-    <Track {...track} />
-  {/each}
+  <slot />
 </video>

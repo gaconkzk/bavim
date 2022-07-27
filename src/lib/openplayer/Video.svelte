@@ -2,15 +2,12 @@
   import type Player from 'openplayerjs'
   import OpenPlayerJs from 'openplayerjs'
   import { nanoid } from 'nanoid'
-  import { onMount } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
 
   import { DEFAULT_CONFIG as defaultConfig } from '../constant'
-  import Track from '../Track.svelte'
-
-  export let tracks: TrackType[] = []
-
   export let bgImg: string = null
   export let src: string = null
+  export let preload: string = 'auto'
 
   let container: HTMLMediaElement
   let player: Player
@@ -34,6 +31,10 @@
       }
     }
   })
+
+  onDestroy(() => {
+    player?.destroy()
+  })
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
@@ -42,13 +43,8 @@
   id="op_{nanoid()}"
   data-poster={bgImg}
   class="op-player__media"
-  controls
-  playsinline
+  {src}
+  {preload}
 >
-  {#if src}
-    <source {src} type="video/mp4" />
-  {/if}
-  {#each tracks as track}
-    <Track {...track} />
-  {/each}
+  <slot />
 </video>

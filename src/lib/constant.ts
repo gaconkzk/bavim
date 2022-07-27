@@ -1,3 +1,7 @@
+export enum MEDIA_TYPE {
+  MKV = 'video/x-matroska',
+}
+
 export const DEFAULT_CONFIG = {
   title: 'BAVI Video Player',
   // Disable

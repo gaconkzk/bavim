@@ -12,3 +12,8 @@ type TrackType = {
   srclang?: string
   isDefault?: boolean
 }
+
+type SourceType = {
+  src: string
+  type?: string
+}
