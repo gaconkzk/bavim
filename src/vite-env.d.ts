@@ -1,5 +1,6 @@
 /// <reference types="svelte" />
 /// <reference types="vite/client" />
+/// <reference types="openplayerjs" />
 
 enum TrackKind {
   CAPTIONS = 'captions',

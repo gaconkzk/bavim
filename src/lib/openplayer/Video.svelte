@@ -1,9 +1,11 @@
 <script lang="ts">
+  import type Player from 'openplayerjs'
   import OpenPlayerJs from 'openplayerjs'
+  import { nanoid } from 'nanoid'
   import { onMount } from 'svelte'
 
   import { DEFAULT_CONFIG as defaultConfig } from '../constant'
-  import Track from './Track.svelte'
+  import Track from '../Track.svelte'
 
   export let tracks: TrackType[] = []
 
@@ -11,7 +13,7 @@
   export let src: string = null
 
   let container: HTMLMediaElement
-  let player
+  let player: Player
 
   let config = Object.assign(
     {},
@@ -22,13 +24,14 @@
     },
   )
 
-  onMount(() => {
+  onMount(async () => {
     if (container) {
-      player = new OpenPlayerJs(container, {
-        showLoaderOnInit: false,
-        pauseOthers: false,
-      })
-      player.init()
+      try {
+        player = new OpenPlayerJs(container)
+        await player.init()
+      } catch (err) {
+        console.error(err)
+      }
     }
   })
 </script>
@@ -36,6 +39,7 @@
 <!-- svelte-ignore a11y-media-has-caption -->
 <video
   bind:this={container}
+  id="op_{nanoid()}"
   data-poster={bgImg}
   class="op-player__media"
   controls

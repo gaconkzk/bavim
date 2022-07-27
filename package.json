@@ -16,6 +16,7 @@
     "@tsconfig/svelte": "^3.0.0",
     "@unocss/reset": "^0.44.7",
     "@unocss/transformer-directives": "^0.44.7",
+    "nanoid": "^4.0.0",
     "openplayerjs": "^2.11.0",
     "plyr": "^3.7.2",
     "svelte": "^3.49.0",

@@ -1,26 +1,15 @@
 <script lang="ts">
-  import('./plyr/styles.css')
-  import Plyr from 'plyr'
-  import('plyr')
-  import { onMount } from 'svelte'
-  import { DEFAULT_CONFIG } from './constant'
+  import PlyrVideo from './plyr/Video.svelte'
+  import OpenPlayerVideo from './openplayer/Video.svelte'
 
-  let container: HTMLElement
-  let player
+  const types = {
+    plyr: PlyrVideo,
+    openplayer: OpenPlayerVideo,
+  }
 
-  onMount(() => {
-    if (container) {
-      player = new Plyr(container, {})
-    }
-  })
+  export let type: 'plyr' | 'openplayer' = 'plyr'
+
+  const { type: _, ...propNoType } = $$props
 </script>
 
-<video bind:this={container}>
-  <track
-    kind="captions"
-    label="English captions"
-    src="/path/to/captions.vtt"
-    srclang="en"
-    default
-  />
-</video>
+<svelte:component this={types[type]} {...propNoType} />
