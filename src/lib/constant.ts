@@ -1,5 +1,6 @@
 export enum MEDIA_TYPE {
   MKV = 'video/x-matroska',
+  MP4 = 'video/mp4',
 }
 
 export const DEFAULT_CONFIG = {

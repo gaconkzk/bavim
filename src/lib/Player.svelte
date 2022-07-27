@@ -2,6 +2,7 @@
   import PlyrVideo from './plyr/Video.svelte'
   import OpenPlayerVideo from './openplayer/Video.svelte'
   import Track from './Track.svelte'
+  import { MEDIA_TYPE } from './constant'
 
   const types = {
     plyr: PlyrVideo,
@@ -12,7 +13,9 @@
   export let tracks: TrackType[] = []
   export let sources: SourceType[] | string[] = []
 
-  $: srcs = sources.map((s) => (typeof s === 'string' ? { src: s } : s))
+  $: srcs = sources.map((s) =>
+    typeof s === 'string' ? { src: s, type: MEDIA_TYPE.MP4 } : s,
+  )
   const {
     type: _type,
     tracks: _tracks,
