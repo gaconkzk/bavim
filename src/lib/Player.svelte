@@ -19,19 +19,22 @@
     type: _type,
     tracks: _tracks,
     sources: _sources,
+    class: _class,
     ...propNoType
   } = $$props
 </script>
 
-<svelte:component this={types[type]} src={srcs?.[0]?.src} {...propNoType}>
-  {#if srcs.length > 0}
-    {#each srcs as source}
-      <source {...source} />
-    {/each}
-  {/if}
-  {#if tracks.length > 0}
-    {#each tracks as track}
-      <track {...track} />
-    {/each}
-  {/if}
-</svelte:component>
+<div class={_class}>
+  <svelte:component this={types[type]} src={srcs?.[0]?.src} {...propNoType}>
+    {#if srcs.length > 0}
+      {#each srcs as source}
+        <source {...source} />
+      {/each}
+    {/if}
+    {#if tracks.length > 0}
+      {#each tracks as track}
+        <track {...track} />
+      {/each}
+    {/if}
+  </svelte:component>
+</div>
